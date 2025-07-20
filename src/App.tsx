@@ -1,27 +1,33 @@
-import Navigation from './components/Navigation'
-import HeroSection from './components/HeroSection'
-import ServicesSection from './components/ServicesSection'
-import ProductHighlight from './components/ProductHighlight'
-import TestimonialsSection from './components/TestimonialsSection'
-import IndustriesSection from './components/IndustriesSection'
-import ContactSection from './components/ContactSection'
-import Footer from './components/Footer'
+import React from 'react';
+import { motion } from 'framer-motion';
+import Navigation from './components/Navigation';
+import HeroSection from './components/HeroSection';
+import ProductsSection from './components/ProductsSection';
+import ServicesSection from './components/ServicesSection';
+import IndustriesSection from './components/IndustriesSection';
+import ContactSection from './components/ContactSection';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <main>
+      
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <HeroSection />
+        <ProductsSection />
         <ServicesSection />
-        <ProductHighlight />
-        <TestimonialsSection />
         <IndustriesSection />
         <ContactSection />
-      </main>
+      </motion.main>
+      
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

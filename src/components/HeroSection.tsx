@@ -1,116 +1,197 @@
-import { Button } from './ui/button'
-import { ArrowRight, Play, CheckCircle } from 'lucide-react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Play, Star, Users, Award, Zap } from 'lucide-react';
 
-export default function HeroSection() {
+const HeroSection = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const floatingVariants = {
+    animate: {
+      y: [-10, 10, -10],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="relative min-h-screen bg-gradient-primary overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teflow-lavender via-background to-white"></div>
-      <div className="absolute top-20 left-10 w-72 h-72 bg-teflow-blue/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-teflow-green/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto container-padding">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8 animate-slide-in-left">
-            {/* Badge */}
-            <div className="inline-flex items-center space-x-2 glass-card px-4 py-2 rounded-full">
-              <CheckCircle className="w-4 h-4 text-teflow-green" />
-              <span className="text-sm font-medium">Trusted by 500+ Industries Across India</span>
-            </div>
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl"></div>
+      </div>
 
-            {/* Main Headline */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Premium{' '}
-                <span className="bg-gradient-to-r from-teflow-blue to-teflow-green bg-clip-text text-transparent">
-                  Teflon Pumps
-                </span>{' '}
-                for Chemical Excellence
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-                Manufacturing high-performance Teflon pumps for extreme chemical environments. 
-                Expert consultancy, maintenance, and 24/7 support across India.
-              </p>
+      {/* Floating Cards */}
+      <motion.div
+        variants={floatingVariants}
+        animate="animate"
+        className="absolute top-20 right-20 hidden lg:block"
+      >
+        <div className="glass rounded-2xl p-4 w-64">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-secondary rounded-lg flex items-center justify-center">
+              <Award className="text-white" size={20} />
             </div>
-
-            {/* Key Benefits */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                'High-Temperature Resistant',
-                'Chemical Compatibility',
-                '24/7 Expert Support'
-              ].map((benefit, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-teflow-green flex-shrink-0" />
-                  <span className="text-sm font-medium">{benefit}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="btn-primary group">
-                Explore Products
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 smooth-transition" />
-              </Button>
-              <Button size="lg" variant="outline" className="btn-secondary group">
-                <Play className="w-5 h-5 mr-2" />
-                Get Pumping Solution
-              </Button>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex items-center space-x-8 pt-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-teflow-blue">500+</div>
-                <div className="text-sm text-muted-foreground">Happy Clients</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-teflow-blue">15+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-teflow-blue">24/7</div>
-                <div className="text-sm text-muted-foreground">Support</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Hero Image */}
-          <div className="relative animate-slide-in-right">
-            <div className="glass-card p-8 rounded-3xl">
-              {/* Placeholder for pump image */}
-              <div className="aspect-square bg-gradient-to-br from-teflow-blue/20 to-teflow-green/20 rounded-2xl flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-24 h-24 bg-teflow-blue/20 rounded-full flex items-center justify-center mx-auto">
-                    <div className="w-12 h-12 bg-teflow-blue rounded-full"></div>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-semibold">Teflon Chemical Pump</h3>
-                    <p className="text-muted-foreground">High-performance industrial solution</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Cards */}
-            <div className="absolute -top-4 -right-4 glass-card p-4 rounded-xl animate-float">
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-teflow-green" />
-                <span className="text-sm font-medium">ISO Certified</span>
-              </div>
-            </div>
-            
-            <div className="absolute -bottom-4 -left-4 glass-card p-4 rounded-xl animate-float" style={{ animationDelay: '0.5s' }}>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-teflow-green" />
-                <span className="text-sm font-medium">Made in India</span>
-              </div>
+            <div>
+              <p className="text-white font-semibold">ISO Certified</p>
+              <p className="text-white/70 text-sm">Quality Assurance</p>
             </div>
           </div>
         </div>
+      </motion.div>
+
+      <motion.div
+        variants={floatingVariants}
+        animate="animate"
+        style={{ animationDelay: '1s' }}
+        className="absolute bottom-32 left-20 hidden lg:block"
+      >
+        <div className="glass rounded-2xl p-4 w-56">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-blue rounded-lg flex items-center justify-center">
+              <Users className="text-white" size={20} />
+            </div>
+            <div>
+              <p className="text-white font-semibold">500+ Clients</p>
+              <p className="text-white/70 text-sm">Trusted Worldwide</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-center"
+        >
+          {/* Badge */}
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 mb-8"
+          >
+            <Star className="text-yellow-400" size={16} />
+            <span className="text-white/90 text-sm font-medium">India's Leading Pump Manufacturer</span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+          >
+            the 1% pump
+            <br />
+            <span className="text-gradient bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+              solution library
+            </span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            variants={itemVariants}
+            className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed"
+          >
+            Discover the best chemical pump solutions with our library of over 3000+ pump specifications and
+            tools. Manufacturing excellence forever.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-primary text-lg px-8 py-4 flex items-center space-x-2 group"
+            >
+              <span>Explore Products</span>
+              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="glass text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 group"
+            >
+              <Play className="group-hover:scale-110 transition-transform" size={20} />
+              <span>Watch Demo</span>
+            </motion.button>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            variants={itemVariants}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+          >
+            {[
+              { number: '500+', label: 'Happy Clients', icon: Users },
+              { number: '15+', label: 'Years Experience', icon: Award },
+              { number: '3000+', label: 'Pump Solutions', icon: Zap },
+              { number: '24/7', label: 'Support', icon: Star },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="glass rounded-2xl p-6 text-center group cursor-pointer"
+              >
+                <stat.icon className="text-white/80 mx-auto mb-3 group-hover:text-white transition-colors" size={24} />
+                <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.number}</div>
+                <div className="text-white/70 text-sm">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1 h-3 bg-white/50 rounded-full mt-2"
+          />
+        </motion.div>
+      </motion.div>
     </section>
-  )
-}
+  );
+};
+
+export default HeroSection;
